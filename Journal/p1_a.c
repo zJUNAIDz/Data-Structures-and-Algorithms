@@ -76,7 +76,7 @@ void display()
 void search()
 {
   int val;
-  printf("\n Enter element for searched: ");
+  printf("\n Enter element to search for: ");
   scanf("%d", &val);
   for (i = 1; i < n + 1; i++)
   {
