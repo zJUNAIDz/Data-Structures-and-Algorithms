@@ -8,10 +8,11 @@ int power(int x, int y)
   if (y == 1)
     return x;
   // Recursive Relation
+  int ans = power(x, y / 2);
   if (y % 2)
-    return x * (power(x, y / 2) * power(x, y / 2));
+    return x * ans * ans;
   else
-    return power(x, y / 2) * power(x, y / 2);
+    return ans * ans;
 }
 int main()
 {
