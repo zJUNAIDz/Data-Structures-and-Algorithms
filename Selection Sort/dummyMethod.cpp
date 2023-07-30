@@ -23,4 +23,4 @@ int main()
     cout << "]";
 }
 
-// BHIYYA'S METHOD
+// BHIYYA'S METHOD WAS ALSO SAME
