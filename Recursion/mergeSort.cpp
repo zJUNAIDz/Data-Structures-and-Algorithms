@@ -16,11 +16,11 @@ void merge(vector<int> &arr, int s, int e)
 
   // copying left part (s to mid) in first array
   int k = s;
-  for (int i = 0; i <= len1; i++)
+  for (int i = 0; i < len1; i++)
     first[i] = arr[k++];
   // copying left part (s to mid) in first array
   k = mid + 1;
-  for (int i = 0; i <= len2; i++)
+  for (int i = 0; i < len2; i++)
     second[i] = arr[k++];
   /*
    *Now Merging those two array in a sorted manner.
