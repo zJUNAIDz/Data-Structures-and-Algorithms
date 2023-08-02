@@ -4,10 +4,25 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-void solve(string keyMap[], string output, int index, vector<string> &ans)
+void solve(string digits, string keyMap[], string output, int index, vector<string> &ans)
 {
-  //Base Case
-  
+  // Base Case
+  if (index >= digits.length())
+  {
+    ans.push_back(output);
+    return;
+  }
+
+  // index pointing to which number
+  int number = digits[index] - '0';
+  string keyValue = keyMap[number];
+  // keyValue k elemnts ko traverse karke sab ke liye recursive call maardo
+  for (int i = 0; i < keyValue.length(); i++)
+  {
+    output.push_back(keyValue[i]);
+    solve(digits, keyMap, output, index + 1, ans);
+    output.pop_back(); // Backtracking hori hai bhay bhot zorr se
+  }
 }
 vector<string> letterCombinations(string digits)
 {
@@ -24,7 +39,7 @@ vector<string> letterCombinations(string digits)
                        "pqrs",
                        "tuv",
                        "wxyz"};
-  solve(keyMap, output, index, ans);
+  solve(digits, keyMap, output, index, ans);
 }
 int main()
 {
