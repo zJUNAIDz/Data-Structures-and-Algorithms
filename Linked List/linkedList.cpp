@@ -37,18 +37,59 @@ void insertAtTail(Node *&tail, int data)
  *To insert at particular Index
  * Dummy Approach
  */
-void insertAtIndex(Node *&head, int index, int data)
+// void insertAtIndex(Node *&node, int index, int data)
+// {
+//   Node *element = new Node(data);
+//   Node *currElem = node;
+//   for (int i = 1; i < index; i++)
+//     currElem = currElem->next;
+//   Node *nextElem = currElem->next;
+
+//   currElem->next = element;
+//   element->next = nextElem;
+// }
+/*
+ *improved version of insertAtIndex
+ */
+void insertAtIndex(Node *&node, Node *&tail, int index, int data)
 {
+  // if we have to insert at index 0 ?
+
+  if (index == 0)
+  {
+    insertAtHead(node, data);
+    return; // as we dont want to execute further code
+  }
+
   Node *element = new Node(data);
-  Node *currElem = head;
-  for (int i = 1; i < index; i++)
+  Node *currElem = node;
+  for (int i = 1; i < index - 1; i++)
     currElem = currElem->next;
-  Node *nextElem = currElem->next;
-
+  /*
+   *Update Tail in case we are inserting at last index
+   *Better Approach
+   */
+  if (currElem->next == nullptr)
+  {
+    insertAtTail(tail, data);
+    return;
+  }
+  element->next = currElem->next;
   currElem->next = element;
-  element->next = nextElem;
-}
 
+  /*
+   *Update Tail in case we are inserting at last index
+   */
+  /*
+   *Update Tail in case we are inserting at last index
+   *Dummy Approach
+   */
+
+  // if (element->next == nullptr)
+  // {
+  //   tail = element;
+  // }
+}
 // To Print Linked List
 void print(Node *&head)
 {
@@ -65,7 +106,9 @@ int main()
   // Instantiating a new Liked list (node)
   // In a Heap Memory
   Node *node1 = new Node(1);
-
+  /*
+   *after modification,we better not use node1
+   */
   // Pointer to Head(first element)
   Node *head = node1;
   /*
@@ -79,7 +122,8 @@ int main()
 
   insertAtTail(tail, 2);
   insertAtTail(tail, 3);
-  insertAtIndex(head, 1, 5);
+  insertAtIndex(head, tail, 1, 5);
+  insertAtIndex(head, tail, 0, 100);
   print(head);
   // printing
   // cout << "data: " << node1->data << endl;
