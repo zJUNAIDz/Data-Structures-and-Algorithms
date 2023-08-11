@@ -23,6 +23,18 @@ void insertAtHead(Node *&head, int data)
   head = temp;
 }
 
+/*
+ * To Insert at tail using head (dummy approach)
+ */
+void insertAtTail(Node *&tail, int data)
+{
+  Node *element = new Node(data);
+  tail->next = element;
+  // tail=element;
+  tail = tail->next;
+}
+
+
 // To Print Linked List
 void print(Node *&head)
 {
@@ -32,17 +44,31 @@ void print(Node *&head)
     cout << temp->data << ' ';
     temp = temp->next;
   }
+  cout << endl;
 }
 int main()
 {
   // Instantiating a new Liked list (node)
   // In a Heap Memory
   Node *node1 = new Node(34);
-  insertAtHead(node1, 87);
-  print(node1);
+
+  // Pointer to Head(first element)
+  Node *head = node1;
+  /*
+   * Pointer to tail(in the beginning, tail will also point to first element as a linked list has only one element)
+   */
+  Node *tail = node1;
+  print(head);
+
+  insertAtHead(head, 87);
+  print(head);
+
+  insertAtTail(tail, 77);
+
+  print(head);
   // printing
-  cout << "data: " << node1->data << endl;
-  cout << "Next: " << node1->next << endl;
+  // cout << "data: " << node1->data << endl;
+  // cout << "Next: " << node1->next << endl;
 
   return 0;
 }
