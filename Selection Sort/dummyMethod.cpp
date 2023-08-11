@@ -1,4 +1,5 @@
 #include <iostream>
+#include "print-array.h"
 using namespace std;
 // DUMMY TRY
 
@@ -11,16 +12,7 @@ int main()
         for (int j = i + 1; j <= round - 1; j++)
             if (arr[i] > arr[j])
                 swap(arr[i], arr[j]);
-
-    // Just for printing array in style
-    cout << "[";
-    for (int i = 0; i <= round - 1; i++)
-    {
-        cout << arr[i];
-        if (i != round - 1)
-            cout << ", ";
-    }
-    cout << "]";
+    printIntArray(arr);
 }
 
 // BHIYYA'S METHOD WAS ALSO SAME
