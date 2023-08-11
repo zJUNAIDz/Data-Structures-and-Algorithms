@@ -33,7 +33,21 @@ void insertAtTail(Node *&tail, int data)
   // tail=element;
   tail = tail->next;
 }
+/*
+ *To insert at particular Index
+ * Dummy Approach
+ */
+void insertAtIndex(Node *&head, int index, int data)
+{
+  Node *element = new Node(data);
+  Node *currElem = head;
+  for (int i = 1; i < index; i++)
+    currElem = currElem->next;
+  Node *nextElem = currElem->next;
 
+  currElem->next = element;
+  element->next = nextElem;
+}
 
 // To Print Linked List
 void print(Node *&head)
@@ -50,7 +64,7 @@ int main()
 {
   // Instantiating a new Liked list (node)
   // In a Heap Memory
-  Node *node1 = new Node(34);
+  Node *node1 = new Node(1);
 
   // Pointer to Head(first element)
   Node *head = node1;
@@ -58,13 +72,14 @@ int main()
    * Pointer to tail(in the beginning, tail will also point to first element as a linked list has only one element)
    */
   Node *tail = node1;
-  print(head);
+  // print(head);
 
-  insertAtHead(head, 87);
-  print(head);
+  insertAtHead(head, 0);
+  // print(head);
 
-  insertAtTail(tail, 77);
-
+  insertAtTail(tail, 2);
+  insertAtTail(tail, 3);
+  insertAtIndex(head, 1, 5);
   print(head);
   // printing
   // cout << "data: " << node1->data << endl;
