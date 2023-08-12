@@ -15,7 +15,7 @@ public:
 };
 
 // Methods
-// To Insert at head (start)
+// *To Insert at head (start)
 void insertAtHead(Node *&head, int data)
 {
   Node *temp = new Node(data);
@@ -23,9 +23,7 @@ void insertAtHead(Node *&head, int data)
   head = temp;
 }
 
-/*
- * To Insert at tail using head (dummy approach)
- */
+//  * To Insert at tail using head (dummy approach)
 void insertAtTail(Node *&tail, int data)
 {
   Node *element = new Node(data);
@@ -33,10 +31,8 @@ void insertAtTail(Node *&tail, int data)
   // tail=element;
   tail = tail->next;
 }
-/*
- *To insert at particular Index
- * Dummy Approach
- */
+//  *To insert at particular Index
+//  * Dummy Approach
 // void insertAtIndex(Node *&node, int index, int data)
 // {
 //   Node *element = new Node(data);
@@ -48,27 +44,23 @@ void insertAtTail(Node *&tail, int data)
 //   currElem->next = element;
 //   element->next = nextElem;
 // }
-/*
- *improved version of insertAtIndex
- */
-void insertAtIndex(Node *&node, Node *&tail, int index, int data)
+//  *improved version of insertAtIndex
+void insertAtIndex(Node *&head, Node *&tail, int index, int data)
 {
   // if we have to insert at index 0 ?
 
   if (index == 0)
   {
-    insertAtHead(node, data);
+    insertAtHead(head, data);
     return; // as we dont want to execute further code
   }
 
   Node *element = new Node(data);
-  Node *currElem = node;
+  Node *currElem = head;
   for (int i = 1; i < index - 1; i++)
     currElem = currElem->next;
-  /*
-   *Update Tail in case we are inserting at last index
-   *Better Approach
-   */
+  //  *Update Tail in case we are inserting at last index
+  //  *Better Approach
   if (currElem->next == nullptr)
   {
     insertAtTail(tail, data);
@@ -77,20 +69,48 @@ void insertAtIndex(Node *&node, Node *&tail, int index, int data)
   element->next = currElem->next;
   currElem->next = element;
 
-  /*
-   *Update Tail in case we are inserting at last index
-   */
-  /*
-   *Update Tail in case we are inserting at last index
-   *Dummy Approach
-   */
-
+  //  *Update Tail in case we are inserting at last index
+  //  *Dummy Approach
   // if (element->next == nullptr)
   // {
   //   tail = element;
   // }
 }
-// To Print Linked List
+
+//*To Delete a Node at any Index
+void deleteNode(Node *&head, Node *&tail, int index)
+{
+  // Saving head in a temp variable
+  Node *currElem = head;
+  //*If to be deleted Element is a head
+  if (index == 0)
+  {
+    // delete head; //? Why is it causing infinite calls?
+    head = currElem->next;
+    return;
+  }
+  //*Traversing to each element in a linked list
+  for (int i = 0; i < index - 1; i++)
+  {
+
+    currElem = currElem->next;
+  }
+  //*If to be deleted element is a tail
+  if (currElem->next == tail)
+  {
+    tail = currElem;
+    delete currElem->next;
+    tail->next = nullptr;
+    return;
+  }
+
+  //*Storing the new next in temporary variable
+  Node *newNext = currElem->next->next;
+  delete currElem->next;
+  currElem->next = newNext;
+}
+
+//  *To Print Linked List
 void print(Node *&head)
 {
   Node *temp = head;
@@ -124,6 +144,7 @@ int main()
   insertAtTail(tail, 3);
   insertAtIndex(head, tail, 1, 5);
   insertAtIndex(head, tail, 0, 100);
+  deleteNode(head, tail, 5);
   print(head);
   // printing
   // cout << "data: " << node1->data << endl;
