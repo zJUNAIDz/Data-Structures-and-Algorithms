@@ -49,27 +49,23 @@ void insertAtHead(Node *&head, int data)
   // shifting head to newNode(previous value)
   head = newNode;
 }
-//* To insert at tail (P.S. we are not tracking tail so just use head)
-void insertAtTail(Node *&head, int data)
+//* To insert at tail 
+void insertAtTail(Node *&tail, int data)
 {
   Node *newNode = new Node(data);
-  Node *tail = head;
-  // Traversing to the last node
-  while (tail->next != nullptr)
-  {
-    tail = tail->next;
-  }
   tail->next = newNode;
   newNode->prev = tail;
+  tail = newNode;
 }
 int main()
 {
   Node *node1 = new Node(10);
   // *Initializing node1 as head
-  //! We won't keep track of tail now as it is optional and will make this code larger
   Node *head = node1;
+  //* initially, taill will also be pointing on head
+  Node *tail = head;
   insertAtHead(head, 50);
-  insertAtTail(head, 88);
+  insertAtTail(tail, 88);
   print(head);
   cout << getLength(head);
   return 0;
