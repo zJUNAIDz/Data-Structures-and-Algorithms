@@ -12,6 +12,12 @@ public:
     this->data = data;
     this->next = nullptr;
   }
+  //! Implementing destructor is unnecessary but it is just for sake of understanding
+  ~Node()
+  {
+    //* TO print destructed(deleted) Value
+    int value = this->data;
+  }
 };
 
 // Methods
@@ -78,6 +84,8 @@ void insertAtIndex(Node *&head, Node *&tail, int index, int data)
 }
 
 //*To Delete a Node at any Index
+//! It's not necessary to keep track of tail...
+//! We are doing it just for eaze of access to last node in a list and nothing else
 void deleteNode(Node *&head, Node *&tail, int index)
 {
   // Saving head in a temp variable
@@ -92,7 +100,6 @@ void deleteNode(Node *&head, Node *&tail, int index)
   //*Traversing to each element in a linked list
   for (int i = 0; i < index - 1; i++)
   {
-
     currElem = currElem->next;
   }
   //*If to be deleted element is a tail
