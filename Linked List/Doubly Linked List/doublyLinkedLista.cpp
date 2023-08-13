@@ -16,6 +16,34 @@ public:
   }
 };
 //* Prints node from given node to last node
+void print(Node *&head);
+//* returns length of LL from given node to last node
+int getLength(Node *&head);
+//* To insert a Node at Head
+void insertAtHead(Node *&head, int data);
+//* To insert at tail
+void insertAtTail(Node *&tail, int data);
+//* To insert at any position( 1 indexed )
+void insertAtPosition(Node *&head, Node *&tail, int pos, int data);
+
+int main()
+{
+  Node *node1 = new Node(10);
+  // *Initializing node1 as head
+  Node *head = node1;
+  //* initially, taill will also be pointing on head
+  Node *tail = head;
+  insertAtHead(head, 50);
+  insertAtTail(tail, 88);
+  insertAtPosition(head, tail, 2, 99);
+  print(head);
+  cout << getLength(head);
+  return 0;
+}
+
+// #FUNCTION DEFINITIONS#
+
+//* Prints node from given node to last node
 void print(Node *&head)
 {
   Node *temp = head;
@@ -49,7 +77,7 @@ void insertAtHead(Node *&head, int data)
   // shifting head to newNode(previous value)
   head = newNode;
 }
-//* To insert at tail 
+//* To insert at tail
 void insertAtTail(Node *&tail, int data)
 {
   Node *newNode = new Node(data);
@@ -57,16 +85,38 @@ void insertAtTail(Node *&tail, int data)
   newNode->prev = tail;
   tail = newNode;
 }
-int main()
+//* To insert at any position( 1 indexed )
+void insertAtPosition(Node *&head, Node *&tail, int pos, int data)
 {
-  Node *node1 = new Node(10);
-  // *Initializing node1 as head
-  Node *head = node1;
-  //* initially, taill will also be pointing on head
-  Node *tail = head;
-  insertAtHead(head, 50);
-  insertAtTail(tail, 88);
-  print(head);
-  cout << getLength(head);
-  return 0;
+  //*If position is head
+  if (pos == 1)
+  {
+    insertAtHead(head, data);
+    return;
+  }
+  //* didn't declared at top to save some memory if position is already at head
+  Node *&currNode = head;
+  // cout << "head " << head->data;
+  Node *newNode = new Node(data);
+  //*Traversing through each node until we reach to node before position
+  for (int i = 1; i < pos - 1; i++)
+  {
+    currNode = currNode->next;
+    // cout << "i:" << i << endl
+    //  << "currnode:" << currNode->data << endl;
+  }
+  //*If position is tail
+  if (currNode->next == tail)
+  {
+    // cout << "oops";
+
+    insertAtTail(tail, data);
+    return;
+  }
+  //* To keep track of Node next to currNode
+  Node *nextNode = currNode->next;
+  currNode->next = newNode;
+  newNode->prev = currNode;
+  newNode->next = nextNode;
+  nextNode->prev = newNode;
 }
