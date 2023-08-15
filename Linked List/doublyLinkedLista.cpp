@@ -15,50 +15,44 @@ public:
     this->prev = nullptr;
     this->next = nullptr;
   }
+  ~Node()
+  {
+    if (this->next != nullptr || this->prev != nullptr)
+    {
+      this->next = nullptr;
+      this->prev = nullptr;
+    }
+    cout << "memory freed for " << data << endl;
+  }
 };
 
-// #FUNCTION DECLARATIONS#
+// // #FUNCTION DECLARATIONS#
 
-//* Prints node from given node to last node
-void print(Node *&head, Node *&tail);
-//* returns length of LL from given node to last node
-int getLength(Node *&head);
-//* To insert a Node at Head
-void insertAtHead(Node *&head, int data);
-//* To insert at tail
-void insertAtTail(Node *&tail, int data);
-//* To insert at any position( 1 indexed )
-void insertAtPosition(Node *&head, Node *&tail, int pos, int data);
-
-// #MAIN BODY#
-
-int main()
-{
-  Node *node1 = new Node(10);
-  // *Initializing node1 as head
-  Node *head = node1;
-  //* initially, taill will also be pointing on head
-  Node *tail = head;
-  insertAtHead(head, 50);
-  insertAtTail(tail, 88);
-  insertAtPosition(head, tail, 2, 99);
-  insertAtPosition(head, tail, 3, 19);
-  insertAtPosition(head, tail, 6, 19);
-  print(head, tail);
-  return 0;
-}
-
+// //* Prints node from given node to last node
+// void print(Node *&head, Node *&tail);
+// //* returns length of LL from given node to last node
+// int getLength(Node *&head);
+// //* To insert a Node at Head
+// void insertAtHead(Node *&head, int data);
+// //* To insert at tail
+// void insertAtTail(Node *&tail, int data);
+// //* To insert at any position( 1 indexed )
+// void insertAtPosition(Node *&head, Node *&tail, int pos, int data);
+// //* To delete at any position
+// void deleteNode(Node *&head, Node *&tail, int pos);
 // #FUNCTION DEFINITIONS#
 
 //* Prints node from given node to last node
 void print(Node *&head, Node *&tail)
 {
+  cout << endl;
   Node *temp = head;
   while (temp != nullptr)
   {
     cout << temp->data << ' ';
     temp = temp->next;
   }
+  cout << endl;
 }
 //* returns length of LL from given node to last node
 int getLength(Node *&head)
@@ -128,4 +122,58 @@ void insertAtPosition(Node *&head, Node *&tail, int pos, int data)
   newNode->prev = currNode;
   newNode->next = nextNode;
   nextNode->prev = newNode;
+}
+void deleteNode(Node *&head, Node *&tail, int pos)
+{
+  //* If position is head
+  if (pos == 1)
+  {
+    head = head->next;
+    delete head->prev;
+    head->prev = nullptr;
+    return;
+  }
+  //*Traversing to Node at postion
+  //* Keeping track of current Node and its Previous Node
+  Node *currNode = head;
+  for (int i = 1; i < pos; i++)
+  {
+    currNode = currNode->next;
+  }
+  //*If position is tail
+  if (currNode == tail)
+  {
+    currNode = currNode->prev;
+    delete currNode->next;
+    currNode->next = nullptr;
+    return;
+  }
+  //* If position is somewhere in the middle
+  currNode->prev->next = currNode->next;
+  currNode->next->prev = currNode->prev;
+  delete currNode;
+}
+
+// #MAIN BODY#
+
+int main()
+{
+  Node *node1 = new Node(10);
+  // *Initializing node1 as head
+  Node *head = node1;
+  //* initially, taill will also be pointing on head
+  Node *tail = head;
+  insertAtHead(head, 50);
+  insertAtTail(tail, 88);
+  insertAtPosition(head, tail, 2, 99);
+  insertAtPosition(head, tail, 3, 19);
+  insertAtPosition(head, tail, 6, 19);
+  print(head, tail);
+  deleteNode(head, tail, 1);
+  print(head, tail);
+  deleteNode(head, tail, 5);
+  print(head, tail);
+  deleteNode(head, tail, 3);
+  print(head, tail);
+  return 0;
 }
