@@ -43,7 +43,7 @@ int main()
   insertAtTail(tail, 88);
   insertAtPosition(head, tail, 2, 99);
   insertAtPosition(head, tail, 3, 19);
-  // insertAtPosition(head, tail, 6, 19);
+  insertAtPosition(head, tail, 6, 19);
   print(head, tail);
   return 0;
 }
@@ -102,7 +102,6 @@ void insertAtPosition(Node *&head, Node *&tail, int pos, int data)
   }
   //* didn't declared at top to save some memory if position is already at head
   Node *currNode = head;
-  // cout << "head " << head->data;
   Node *newNode = new Node(data);
   //*Traversing through each node until we reach to node before position
   for (int i = 1; i < pos - 1; i++)
@@ -116,11 +115,12 @@ void insertAtPosition(Node *&head, Node *&tail, int pos, int data)
     return;
   }
   //*IF position is next to tail
-  if (currNode->next == nullptr)
+  if (currNode == tail)
   {
     currNode->next = newNode;
     newNode->prev = currNode;
     tail = newNode;
+    return;
   }
   //* To keep track of Node next to currNode
   Node *nextNode = currNode->next;
