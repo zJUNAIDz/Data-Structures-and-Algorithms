@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 //*Implementing Node for Doubly Linked List
 class Node
@@ -15,8 +16,11 @@ public:
     this->next = nullptr;
   }
 };
+
+// #FUNCTION DECLARATIONS#
+
 //* Prints node from given node to last node
-void print(Node *&head);
+void print(Node *&head, Node *&tail);
 //* returns length of LL from given node to last node
 int getLength(Node *&head);
 //* To insert a Node at Head
@@ -25,6 +29,8 @@ void insertAtHead(Node *&head, int data);
 void insertAtTail(Node *&tail, int data);
 //* To insert at any position( 1 indexed )
 void insertAtPosition(Node *&head, Node *&tail, int pos, int data);
+
+// #MAIN BODY#
 
 int main()
 {
@@ -36,15 +42,16 @@ int main()
   insertAtHead(head, 50);
   insertAtTail(tail, 88);
   insertAtPosition(head, tail, 2, 99);
-  print(head);
-  cout << getLength(head);
+  insertAtPosition(head, tail, 3, 19);
+  // insertAtPosition(head, tail, 6, 19);
+  print(head, tail);
   return 0;
 }
 
 // #FUNCTION DEFINITIONS#
 
 //* Prints node from given node to last node
-void print(Node *&head)
+void print(Node *&head, Node *&tail)
 {
   Node *temp = head;
   while (temp != nullptr)
@@ -52,7 +59,6 @@ void print(Node *&head)
     cout << temp->data << ' ';
     temp = temp->next;
   }
-  cout << endl;
 }
 //* returns length of LL from given node to last node
 int getLength(Node *&head)
@@ -95,23 +101,26 @@ void insertAtPosition(Node *&head, Node *&tail, int pos, int data)
     return;
   }
   //* didn't declared at top to save some memory if position is already at head
-  Node *&currNode = head;
+  Node *currNode = head;
   // cout << "head " << head->data;
   Node *newNode = new Node(data);
   //*Traversing through each node until we reach to node before position
   for (int i = 1; i < pos - 1; i++)
   {
     currNode = currNode->next;
-    // cout << "i:" << i << endl
-    //  << "currnode:" << currNode->data << endl;
   }
   //*If position is tail
   if (currNode->next == tail)
   {
-    // cout << "oops";
-
     insertAtTail(tail, data);
     return;
+  }
+  //*IF position is next to tail
+  if (currNode->next == nullptr)
+  {
+    currNode->next = newNode;
+    newNode->prev = currNode;
+    tail = newNode;
   }
   //* To keep track of Node next to currNode
   Node *nextNode = currNode->next;
