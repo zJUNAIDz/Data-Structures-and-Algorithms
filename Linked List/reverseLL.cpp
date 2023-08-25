@@ -31,6 +31,7 @@ void insert(Node *&head, int data)
   }
   temp->next = new Node(data);
 }
+//* Iteratively reversing a Linked List
 void reverse(Node *&head)
 {
   //*If it has only one node
@@ -42,23 +43,51 @@ void reverse(Node *&head)
   //* keeping track of previous and next of current node
   Node *prev = nullptr;
   Node *curr = head;
-  Node *next = head->next;
+  Node *next = curr;
   while (curr != nullptr)
   {
+    //* updating forward pointer
+    next = curr->next;
     curr->next = prev;
     prev = curr;
     curr = next;
-    // if (next->next)
-    next = next->next;
-
-    cout << prev->data << endl;
-    cout << curr->data << endl;
-    cout << next->data << endl;
-    cout << endl;
-    cout << endl;
-    cout << endl;
   }
   head = prev;
+}
+//* recursively reversing a Linked List
+void reverser(Node *&head, Node *&prev, Node *&curr)
+{
+  // //* Edge Cases
+  // if (curr->next == nullptr || curr == nullptr)
+  // {
+  //   return;
+  // }
+  //* keeping track of previous and next of current node
+
+  //* Base Case
+  if (curr == nullptr)
+  {
+    head = prev;
+    return;
+  }
+  //*Processing
+
+  //* Recursive Relation
+  reverser(head, curr, curr->next);
+  curr->next = prev;
+}
+
+Node *reverser2(Node *head)
+{
+  if (head == nullptr || head->next == nullptr)
+  {
+    return head;
+  }
+
+  Node *chotahead = reverser2(head->next);
+  head->next->next = head;
+  head->next = nullptr;
+  return chotahead;
 }
 int main()
 {
@@ -70,7 +99,14 @@ int main()
   print(head);
   insert(head, 45);
   print(head);
-  reverse(head);
+  Node *prev = nullptr;
+  Node *curr = head;
+  Node *next = curr->next;
+  reverser(head, prev, curr);
+  cout << "reversed: ";
   print(head);
+  Node *reversedList = reverser2(head);
+  cout << "reversed 2 : ";
+  print(reversedList);
   return 0;
 }

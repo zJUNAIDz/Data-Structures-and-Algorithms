@@ -16,7 +16,10 @@ public:
   ~Node()
   {
     //* TO print destructed(deleted) Value
-    int value = this->data;
+    int value = data;
+    //*Pointing next to null
+    this->next = nullptr;
+    cout << "Memory freed for " << data << endl;
   }
 };
 
@@ -82,7 +85,6 @@ void insertAtIndex(Node *&head, Node *&tail, int index, int data)
   //   tail = element;
   // }
 }
-
 //*To Delete a Node at any Index
 //! It's not necessary to keep track of tail...
 //! We are doing it just for eaze of access to last node in a list and nothing else
@@ -95,6 +97,7 @@ void deleteNode(Node *&head, Node *&tail, int index)
   {
     // delete head; //? Why is it causing infinite calls?
     head = currElem->next;
+    delete currElem;
     return;
   }
   //*Traversing to each element in a linked list

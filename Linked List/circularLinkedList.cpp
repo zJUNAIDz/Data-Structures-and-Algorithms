@@ -26,7 +26,7 @@ public:
 //*To print CLL3
 void print(Node *&tail)
 {
-  cout << "hello ji" << endl;
+  // cout << "hello ji" << endl;
   //*My Approach
   // //*If CLL has only one Node(i.e. tail)
   // if (tail->next == tail)
@@ -47,9 +47,9 @@ void print(Node *&tail)
   Node *temp = tail;
   do
   {
-    cout << temp->next->data << ' ';
+    cout << temp->data << ' ';
     temp = temp->next;
-  } while (temp->next != tail);
+  } while (temp != tail);
   cout << endl;
 }
 
@@ -115,7 +115,12 @@ void insertAtPosition(Node *&tail, int pos, int data)
 //*Delete a Node at any position
 void deleteNode(Node *&tail, int pos)
 {
-
+  //*IF empty LL
+  if (tail == nullptr)
+  {
+    cout << "The List is Empty" << endl;
+    return;
+  }
   //*If CLL contains only 1 Node
   if (tail->next == tail)
   {
@@ -171,27 +176,29 @@ int main()
   insertAtTail(tail, 11);
   // print(tail);
   // cout << "tail: " << tail->data << endl;
-  insertAtTail(tail, 12);
+  // insertAtTail(tail, 12);
   // print(tail);
   // cout << "tail: " << tail->data << endl;
-  insertAtTail(tail, 13);
+  // insertAtTail(tail, 13);
   // print(tail);
   // cout << "tail: " << tail->data << endl;
-  insertAtHead(tail, 19);
+  // insertAtHead(tail, 19);
   // print(tail);
   // cout << "head: " << tail->next->data << endl;
   // cout << "tail: " << tail->data << endl;
-  insertAtPosition(tail, 3, 18);
+  // insertAtPosition(tail, 3, 18);
   // print(tail);
 
-  insertAtPosition(tail, 1, 18);
+  // insertAtPosition(tail, 1, 18);
   // print(tail);
 
-  insertAtPosition(tail, 6, 20);
+  // insertAtPosition(tail, 6, 20);
+  cout << "---" << endl;
   print(tail);
+  cout << "---" << endl;
   // cout << "head: " << tail->next->data << endl;
   // cout << "tail: " << tail->data << endl;
-  deleteNode(tail, 8);
+  deleteNode(tail, 1);
   print(tail);
   // cout << "head: " << tail->next->data << endl;
   // cout << "tail: " << tail->data << endl;
