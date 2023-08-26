@@ -58,17 +58,29 @@ Node *middle(Node *&head)
   {
     return head;
   }
+  //-----------------------------------------------------------------------
+  //*Creating slow and fast pointers
+  // Node *slow = head;
+  // Node *fast = head->next;
+
+  // while (fast->next != nullptr)
+  // {
+  //   slow = slow->next;
+
+  //   // fast = fast->next ? fast->next->next : fast->next;
+  //   fast = fast->next->next;
+  //   // cout << "atka";
+  // }
+  // return slow;
+  //-----------------------------------------------------------------------
   //*Creating slow and fast pointers
   Node *slow = head;
   Node *fast = head;
 
-  while (fast->next != nullptr)
+  while (fast->next != nullptr && fast != nullptr)
   {
     slow = slow->next;
-
-    // fast = fast->next ? fast->next->next : fast->next;
-    fast = fast->next->next;
-    // cout << "atka";
+    fast = fast->next ? fast->next->next : fast->next;
   }
   return slow;
 }
