@@ -3,17 +3,17 @@ using namespace std;
 
 // href : Visual representation: https://media.geeksforgeeks.org/wp-content/uploads/20220817185024/CircularSinglyLinkedList-660x172.png
 //* Implementing Circular Linked list class
-class Node
+class ListNode
 {
 public:
   int data;
-  Node *next;
-  Node(int data)
+  ListNode *next;
+  ListNode(int data)
   {
     this->data = data;
     this->next = nullptr;
   }
-  ~Node()
+  ~ListNode()
   {
     if (next != nullptr)
     {
@@ -24,7 +24,7 @@ public:
 };
 
 //*To print CLL3
-void print(Node *&tail)
+void print(ListNode *&tail)
 {
   // cout << "hello ji" << endl;
   //*My Approach
@@ -44,7 +44,7 @@ void print(Node *&tail)
   // cout << tail->data;
   // cout << endl;
   //* Better Approach
-  Node *temp = tail;
+  ListNode *temp = tail;
   do
   {
     cout << temp->data << ' ';
@@ -55,10 +55,10 @@ void print(Node *&tail)
 
 //! creating functions to Insert at head or tail is not necessary ..insert at position is enough
 //* To insert a Node at tail
-void insertAtTail(Node *&tail, int data)
+void insertAtTail(ListNode *&tail, int data)
 {
   // Node *head = tail->next;
-  Node *newNode = new Node(data);
+  ListNode *newNode = new ListNode(data);
   // tail->next = newNode;
   // tail = newNode;
   // tail->next = head;
@@ -67,10 +67,10 @@ void insertAtTail(Node *&tail, int data)
   tail = newNode;
 }
 //* To insert a Node at head
-void insertAtHead(Node *&tail, int data)
+void insertAtHead(ListNode *&tail, int data)
 {
-  Node *head = tail->next;
-  Node *newNode = new Node(data);
+  ListNode *head = tail->next;
+  ListNode *newNode = new ListNode(data);
   // tail->next = newNode;
   // tail = newNode;
   // tail->next = head;
@@ -78,11 +78,11 @@ void insertAtHead(Node *&tail, int data)
   head->next = newNode;
 }
 //*To insert at any postion
-void insertAtPosition(Node *&tail, int pos, int data)
+void insertAtPosition(ListNode *&tail, int pos, int data)
 { //*tracking head for traversal
-  Node *head = tail->next;
+  ListNode *head = tail->next;
   //*New Node to be inserted
-  Node *newNode = new Node(data);
+  ListNode *newNode = new ListNode(data);
   //*If position is at head
   if (pos == 1)
   {
@@ -93,7 +93,7 @@ void insertAtPosition(Node *&tail, int pos, int data)
     insertAtHead(tail, data);
   }
   //*keeping track of current node while not losing head for further use
-  Node *currNode = head;
+  ListNode *currNode = head;
   //* Traversing until we reach node before position
   for (int i = 1; i < pos - 1; i++)
   {
@@ -113,7 +113,7 @@ void insertAtPosition(Node *&tail, int pos, int data)
 }
 
 //*Delete a Node at any position
-void deleteNode(Node *&tail, int pos)
+void deleteNode(ListNode *&tail, int pos)
 {
   //*IF empty LL
   if (tail == nullptr)
@@ -133,14 +133,14 @@ void deleteNode(Node *&tail, int pos)
   {
     cout << "2" << endl;
 
-    Node *temp = tail->next->next;
+    ListNode *temp = tail->next->next;
     delete tail->next;
     tail->next = temp;
     return;
   }
   //*Traversing to previous Node of position(pos-1)
-  Node *prev = tail;
-  Node *curr = tail->next;
+  ListNode *prev = tail;
+  ListNode *curr = tail->next;
 
   for (int i = 1; i < pos; i++)
   {
@@ -165,11 +165,11 @@ void deleteNode(Node *&tail, int pos)
 
 int main()
 {
-  Node *node = new Node(10);
+  ListNode *node = new ListNode(10);
   node->next = node;
   //*This time we will keep track of tail
   //* as we can keep track of head(tail+1) also
-  Node *tail = node;
+  ListNode *tail = node;
 
   // print(tail);
   // cout << "tail: " << tail->data << endl;

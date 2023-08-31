@@ -1,29 +1,29 @@
 #include <iostream>
 using namespace std;
 //* Implementation
-class Node
+class ListNode
 {
 public:
   int data;
-  Node *next;
+  ListNode *next;
 
-  Node(int data)
+  ListNode(int data)
   {
     this->data = data;
     this->next = nullptr;
   }
   void insert(int data)
   {
-    Node *temp = this;
+    ListNode *temp = this;
     while (temp->next != nullptr)
     {
       temp = temp->next;
     }
-    temp->next = new Node(data);
+    temp->next = new ListNode(data);
   }
 };
 //*Printing LL
-void print(Node *head)
+void print(ListNode *head)
 {
   while (head != nullptr)
   {
@@ -33,24 +33,24 @@ void print(Node *head)
   cout << endl;
 }
 //*Insert
-void insert(Node *&head, int data)
+void insert(ListNode *&head, int data)
 {
   if (head == nullptr)
   {
-    head = new Node(data);
+    head = new ListNode(data);
     return;
   }
   //*Traversing to tail
-  Node *temp = head;
+  ListNode *temp = head;
   while (temp->next != nullptr)
   {
     temp = temp->next;
   }
-  temp->next = new Node(data);
+  temp->next = new ListNode(data);
 }
 
 //* Middle of a Linked List
-Node *middle(Node *&head)
+ListNode *middle(ListNode *&head)
 {
 
   //*If there exist only one element
@@ -74,8 +74,8 @@ Node *middle(Node *&head)
   // return slow;
   //-----------------------------------------------------------------------
   //*Creating slow and fast pointers
-  Node *slow = head;
-  Node *fast = head;
+  ListNode *slow = head;
+  ListNode *fast = head;
 
   while (fast->next != nullptr && fast != nullptr)
   {
@@ -86,7 +86,7 @@ Node *middle(Node *&head)
 }
 int main()
 {
-  Node *head = new Node(10);
+  ListNode *head = new ListNode(10);
   insert(head, 20);
   insert(head, 30);
   insert(head, 40);

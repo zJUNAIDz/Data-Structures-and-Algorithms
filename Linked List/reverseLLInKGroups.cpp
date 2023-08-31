@@ -1,19 +1,19 @@
 #include <iostream>
 using namespace std;
-class Node
+class ListNode
 {
 public:
   int data;
-  Node *next;
-  Node(int data)
+  ListNode *next;
+  ListNode(int data)
   {
     this->data = data;
     this->next = nullptr;
   }
 };
-void print(Node *&head)
+void print(ListNode *&head)
 {
-  Node *temp = head;
+  ListNode *temp = head;
   while (temp != nullptr)
   {
     cout << temp->data << ' ';
@@ -21,23 +21,23 @@ void print(Node *&head)
   }
   cout << endl;
 }
-void insert(Node *&head, int data)
+void insert(ListNode *&head, int data)
 {
-  Node *temp = head;
+  ListNode *temp = head;
   while (temp->next != nullptr)
   {
     temp = temp->next;
   }
-  temp->next = new Node(data);
+  temp->next = new ListNode(data);
 }
 /// reverse a Linked List in k-Groups
-Node *reverse(Node *head, int k)
+ListNode *reverse(ListNode *head, int k)
 {
   if (head == nullptr || head->next == nullptr)
   {
     return head;
   }
-  Node *curr = head;
+  ListNode *curr = head;
   int count = 0;
   // is nodes < k?
   while (count < k && curr != nullptr)
@@ -49,8 +49,8 @@ Node *reverse(Node *head, int k)
     return head;
   count = 0;
   curr = head;
-  Node *prev = nullptr;
-  Node *next = nullptr;
+  ListNode *prev = nullptr;
+  ListNode *next = nullptr;
   count = 0;
 
   while (curr != nullptr && count < k)
@@ -95,7 +95,7 @@ Node *reverse(Node *head, int k)
 
 int main()
 {
-  Node *head = new Node(10);
+  ListNode *head = new ListNode(10);
   insert(head, 20);
   insert(head, 30);
   insert(head, 40);
@@ -103,7 +103,7 @@ int main()
   insert(head, 60);
   insert(head, 70);
   print(head);
-  Node *reversedList = reverse(head, 2);
+  ListNode *reversedList = reverse(head, 2);
   cout << "reversed in group of 2:" << endl;
   print(reversedList);
   // print(head);

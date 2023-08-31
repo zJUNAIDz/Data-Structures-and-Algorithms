@@ -1,19 +1,19 @@
 #include <iostream>
 using namespace std;
 // Implementing Singly Linked list node
-class Node
+class ListNode
 {
 public:
   int data;
-  Node *next;
+  ListNode *next;
   // Method to add something in data
-  Node(int data)
+  ListNode(int data)
   {
     this->data = data;
     this->next = nullptr;
   }
   //! Implementing destructor is unnecessary but it is just for sake of understanding
-  ~Node()
+  ~ListNode()
   {
     //* TO print destructed(deleted) Value
     int value = data;
@@ -25,17 +25,17 @@ public:
 
 // Methods
 // *To Insert at head (start)
-void insertAtHead(Node *&head, int data)
+void insertAtHead(ListNode *&head, int data)
 {
-  Node *temp = new Node(data);
+  ListNode *temp = new ListNode(data);
   temp->next = head;
   head = temp;
 }
 
 //  * To Insert at tail using head (dummy approach)
-void insertAtTail(Node *&tail, int data)
+void insertAtTail(ListNode *&tail, int data)
 {
-  Node *element = new Node(data);
+  ListNode *element = new ListNode(data);
   tail->next = element;
   // tail=element;
   tail = tail->next;
@@ -54,7 +54,7 @@ void insertAtTail(Node *&tail, int data)
 //   element->next = nextElem;
 // }
 //  *improved version of insertAtIndex
-void insertAtIndex(Node *&head, Node *&tail, int index, int data)
+void insertAtIndex(ListNode *&head, ListNode *&tail, int index, int data)
 {
   // if we have to insert at index 0 ?
 
@@ -64,8 +64,8 @@ void insertAtIndex(Node *&head, Node *&tail, int index, int data)
     return; // as we dont want to execute further code
   }
 
-  Node *element = new Node(data);
-  Node *currElem = head;
+  ListNode *element = new ListNode(data);
+  ListNode *currElem = head;
   for (int i = 1; i < index - 1; i++)
     currElem = currElem->next;
   //  *Update Tail in case we are inserting at last index
@@ -88,10 +88,10 @@ void insertAtIndex(Node *&head, Node *&tail, int index, int data)
 //*To Delete a Node at any Index
 //! It's not necessary to keep track of tail...
 //! We are doing it just for eaze of access to last node in a list and nothing else
-void deleteNode(Node *&head, Node *&tail, int index)
+void deleteNode(ListNode *&head, ListNode *&tail, int index)
 {
   // Saving head in a temp variable
-  Node *currElem = head;
+  ListNode *currElem = head;
   //*If to be deleted Element is a head
   if (index == 0)
   {
@@ -115,15 +115,15 @@ void deleteNode(Node *&head, Node *&tail, int index)
   }
 
   //*Storing the new next in temporary variable
-  Node *newNext = currElem->next->next;
+  ListNode *newNext = currElem->next->next;
   delete currElem->next;
   currElem->next = newNext;
 }
 
 //  *To Print Linked List
-void print(Node *&head)
+void print(ListNode *&head)
 {
-  Node *temp = head;
+  ListNode *temp = head;
   while (temp != nullptr)
   {
     cout << temp->data << ' ';
@@ -135,16 +135,16 @@ int main()
 {
   // Instantiating a new Liked list (node)
   // In a Heap Memory
-  Node *node1 = new Node(1);
+  ListNode *node1 = new ListNode(1);
   /*
    *after modification,we better not use node1
    */
   // Pointer to Head(first element)
-  Node *head = node1;
+  ListNode *head = node1;
   /*
    * Pointer to tail(in the beginning, tail will also point to first element as a linked list has only one element)
    */
-  Node *tail = node1;
+  ListNode *tail = node1;
   // print(head);
 
   insertAtHead(head, 0);

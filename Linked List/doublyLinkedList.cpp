@@ -2,20 +2,20 @@
 #include <vector>
 using namespace std;
 //*Implementing Node for Doubly Linked List
-class Node
+class ListNode
 {
 public:
   int data;
-  Node *prev;
-  Node *next;
+  ListNode *prev;
+  ListNode *next;
   // Constructor
-  Node(int data)
+  ListNode(int data)
   {
     this->data = data;
     this->prev = nullptr;
     this->next = nullptr;
   }
-  ~Node()
+  ~ListNode()
   {
     if (this->next != nullptr || this->prev != nullptr)
     {
@@ -43,10 +43,10 @@ public:
 // #FUNCTION DEFINITIONS#
 
 //* Prints node from given node to last node
-void print(Node *&head, Node *&tail)
+void print(ListNode *&head)
 {
   cout << endl;
-  Node *temp = head;
+  ListNode *temp = head;
   while (temp != nullptr)
   {
     cout << temp->data << ' ';
@@ -55,9 +55,9 @@ void print(Node *&head, Node *&tail)
   cout << endl;
 }
 //* returns length of LL from given node to last node
-int getLength(Node *&head)
+int getLength(ListNode *&head)
 {
-  Node *temp = head;
+  ListNode *temp = head;
   int len = 1;
   while (temp->next != nullptr)
   {
@@ -67,9 +67,9 @@ int getLength(Node *&head)
   return len;
 }
 //* To insert a Node at Head
-void insertAtHead(Node *&head, int data)
+void insertAtHead(ListNode *&head, int data)
 {
-  Node *newNode = new Node(data);
+  ListNode *newNode = new ListNode(data);
   // pointing newNode next to head
   newNode->next = head;
   // pointing head prev to newNode
@@ -78,15 +78,15 @@ void insertAtHead(Node *&head, int data)
   head = newNode;
 }
 //* To insert at tail
-void insertAtTail(Node *&tail, int data)
+void insertAtTail(ListNode *&tail, int data)
 {
-  Node *newNode = new Node(data);
+  ListNode *newNode = new ListNode(data);
   tail->next = newNode;
   newNode->prev = tail;
   tail = newNode;
 }
 //* To insert at any position( 1 indexed )
-void insertAtPosition(Node *&head, Node *&tail, int pos, int data)
+void insertAtPosition(ListNode *&head, ListNode *&tail, int pos, int data)
 {
   //*If position is head
   if (pos == 1)
@@ -95,8 +95,8 @@ void insertAtPosition(Node *&head, Node *&tail, int pos, int data)
     return;
   }
   //* didn't declared at top to save some memory if position is already at head
-  Node *currNode = head;
-  Node *newNode = new Node(data);
+  ListNode *currNode = head;
+  ListNode *newNode = new ListNode(data);
   //*Traversing through each node until we reach to node before position
   for (int i = 1; i < pos - 1; i++)
   {
@@ -117,13 +117,13 @@ void insertAtPosition(Node *&head, Node *&tail, int pos, int data)
     return;
   }
   //* To keep track of Node next to currNode
-  Node *nextNode = currNode->next;
+  ListNode *nextNode = currNode->next;
   currNode->next = newNode;
   newNode->prev = currNode;
   newNode->next = nextNode;
   nextNode->prev = newNode;
 }
-void deleteNode(Node *&head, Node *&tail, int pos)
+void deleteNode(ListNode *&head, ListNode *&tail, int pos)
 {
   //* If position is head
   if (pos == 1)
@@ -135,7 +135,7 @@ void deleteNode(Node *&head, Node *&tail, int pos)
   }
   //*Traversing to Node at postion
   //* Keeping track of current Node and its Previous Node
-  Node *currNode = head;
+  ListNode *currNode = head;
   for (int i = 1; i < pos; i++)
   {
     currNode = currNode->next;
@@ -158,22 +158,23 @@ void deleteNode(Node *&head, Node *&tail, int pos)
 
 int main()
 {
-  Node *node1 = new Node(10);
+  ListNode *node1 = new ListNode(10);
   // *Initializing node1 as head
-  Node *head = node1;
+  ListNode *head = node1;
   //* initially, taill will also be pointing on head
-  Node *tail = head;
+  ListNode *tail = head;
   insertAtHead(head, 50);
   insertAtTail(tail, 88);
   insertAtPosition(head, tail, 2, 99);
   insertAtPosition(head, tail, 3, 19);
   insertAtPosition(head, tail, 6, 19);
-  print(head, tail);
+  print(head);
   deleteNode(head, tail, 1);
-  print(head, tail);
+  print(head);
   deleteNode(head, tail, 5);
-  print(head, tail);
+  print(head);
   deleteNode(head, tail, 3);
-  print(head, tail);
+  print(head);
   return 0;
 }
+

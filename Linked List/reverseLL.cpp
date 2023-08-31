@@ -1,20 +1,20 @@
 #include <iostream>
 using namespace std;
 // Implementing LL
-class Node
+class ListNode
 {
 public:
   int data;
-  Node *next;
-  Node(int data)
+  ListNode *next;
+  ListNode(int data)
   {
     this->data = data;
     this->next = nullptr;
   }
 };
-void print(Node *&head)
+void print(ListNode *&head)
 {
-  Node *temp = head;
+  ListNode *temp = head;
   while (temp != nullptr)
   {
     cout << temp->data << ' ';
@@ -22,17 +22,17 @@ void print(Node *&head)
   }
   cout << endl;
 }
-void insert(Node *&head, int data)
+void insert(ListNode *&head, int data)
 {
-  Node *temp = head;
+  ListNode *temp = head;
   while (temp->next != nullptr)
   {
     temp = temp->next;
   }
-  temp->next = new Node(data);
+  temp->next = new ListNode(data);
 }
 //* Iteratively reversing a Linked List
-void reverse(Node *&head)
+void reverse(ListNode *&head)
 {
   //*If it has only one node
   if (head->next == nullptr)
@@ -41,9 +41,9 @@ void reverse(Node *&head)
   }
   //*Otherwise
   //* keeping track of previous and next of current node
-  Node *prev = nullptr;
-  Node *curr = head;
-  Node *next = curr;
+  ListNode *prev = nullptr;
+  ListNode *curr = head;
+  ListNode *next = curr;
   while (curr != nullptr)
   {
     //* updating forward pointer
@@ -55,7 +55,7 @@ void reverse(Node *&head)
   head = prev;
 }
 //* recursively reversing a Linked List
-void reverser(Node *&head, Node *&prev, Node *&curr)
+void reverser(ListNode *&head, ListNode *&prev, ListNode *&curr)
 {
   // //* Edge Cases
   // if (curr->next == nullptr || curr == nullptr)
@@ -77,21 +77,21 @@ void reverser(Node *&head, Node *&prev, Node *&curr)
   curr->next = prev;
 }
 
-Node *reverser2(Node *head)
+ListNode *reverser2(ListNode *head)
 {
   if (head == nullptr || head->next == nullptr)
   {
     return head;
   }
 
-  Node *chotahead = reverser2(head->next);
+  ListNode *chotahead = reverser2(head->next);
   head->next->next = head;
   head->next = nullptr;
   return chotahead;
 }
 int main()
 {
-  Node *head = new Node(10);
+  ListNode *head = new ListNode(10);
   print(head);
   insert(head, 20);
   print(head);
@@ -99,13 +99,13 @@ int main()
   print(head);
   insert(head, 45);
   print(head);
-  Node *prev = nullptr;
-  Node *curr = head;
-  Node *next = curr->next;
+  ListNode *prev = nullptr;
+  ListNode *curr = head;
+  ListNode *next = curr->next;
   reverser(head, prev, curr);
   cout << "reversed: ";
   print(head);
-  Node *reversedList = reverser2(head);
+  ListNode *reversedList = reverser2(head);
   cout << "reversed 2 : ";
   print(reversedList);
   return 0;
