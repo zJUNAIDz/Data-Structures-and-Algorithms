@@ -67,6 +67,28 @@ Node *removeFromSortedList(Node *&head)
   print(head);
   return head;
 }
+Node *removeFromUnsortedList(Node *&head)
+{
+  //*Using Brute force
+  Node *i = head;
+  Node *j = head->next;
+  Node *prev = head;
+  while (i)
+  {
+    while (j)
+    {
+      if (i->data == j->data)
+      {
+        Node *duplicate = j;
+        
+      }
+      else
+        j = j->next;
+    }
+    i = i->next;
+    j = i;
+  }
+}
 int main()
 {
   Node *list = new Node(10);
