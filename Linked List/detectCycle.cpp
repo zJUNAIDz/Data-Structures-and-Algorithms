@@ -109,7 +109,7 @@ ListNode *detectCycle(ListNode *&head)
   cout << endl;
   return nullptr;
 }
-//*Get start of a loop
+ //*Get start of a loop
 ListNode *getStartOfLoop(ListNode *head)
 {
   if (!head && !head->next)
