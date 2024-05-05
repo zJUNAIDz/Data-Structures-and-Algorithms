@@ -1,3 +1,4 @@
 *.exe
 Playground/*
-desktop.ini 
+desktop.ini
+.vscode/
