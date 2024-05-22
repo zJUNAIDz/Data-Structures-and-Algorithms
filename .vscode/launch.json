@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Sc",
+            "request": "launch",
+            "mainClass": "misc.Sc",
+            "projectName": "DSA_3f8aa26b"
+        },
+        {
+            "type": "java",
             "name": "HelloWorld",
             "request": "launch",
             "mainClass": "HelloWorld",
