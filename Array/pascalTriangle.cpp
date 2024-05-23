@@ -16,6 +16,14 @@ vector<int> generateRow(int row)
   return res;
 }
 
+vector<vector<int>> generateTriangle(int row)
+{
+  vector<vector<int>> ans = {};
+  for (int i = 1; i <= row; i++)
+    ans.push_back(generateRow(i));
+  return ans;
+}
+
 int main()
 {
   vector<int> ans = generateRow(3);
